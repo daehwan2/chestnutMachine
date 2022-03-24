@@ -38,6 +38,8 @@
  
 
 # 🎨디자인 작업
+https://www.figma.com/file/HbsvGWSwO512AxkmoUUTxk/%EB%94%B1%EB%B0%A4%EB%A8%B8%EC%8B%A0?node-id=0%3A1
+
 
 # 👩‍👧‍👧조원
 **부경대학교 디스플레이 반도체공학과 2022-1 캡스톤 2조**
