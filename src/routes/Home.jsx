@@ -17,6 +17,7 @@ function Home({ userObj }) {
               <Profile userObj={userObj} />
             </div>
             <div className="mb-[30px]">
+              <div className="text-center">나의 최고 기록</div>
               <Score userObj={userObj} />
             </div>
             <div className="mb-[20px]">
