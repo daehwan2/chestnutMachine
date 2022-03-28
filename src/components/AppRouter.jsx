@@ -6,9 +6,11 @@ import Ranking from "../routes/Ranking";
 import { GiPunchBlast } from "react-icons/gi";
 function AppRouter({ isLoggedIn, userObj }) {
   return (
-    <>
+    <div className="h-[100vh] bg-[#DFD8D8]">
       {/* logo */}
-      <a href="/" className="flex items-center text-[20px] p-[5px]">
+      <a
+        href="/"
+        className="absolute top-0 left-0 flex items-center text-[20px] p-[5px]">
         <GiPunchBlast className="text-[red] text-[40px]" />
         <strong>딱밤머신</strong>
       </a>
@@ -29,7 +31,7 @@ function AppRouter({ isLoggedIn, userObj }) {
           )}
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 
