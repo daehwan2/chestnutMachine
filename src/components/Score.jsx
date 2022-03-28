@@ -1,6 +1,6 @@
 import React from "react";
 
-function BestScore() {
+function Score() {
   return (
     <div className="flex flex-col">
       <div className="text-center">나의 최고 기록</div>
@@ -11,4 +11,4 @@ function BestScore() {
   );
 }
 
-export default BestScore;
+export default Score;

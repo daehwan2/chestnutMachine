@@ -1,11 +1,11 @@
 import React from "react";
 import { GiHighPunch, GiPunchingBag } from "react-icons/gi";
-import BestScore from "../components/BestScore";
 import LoginButton from "../components/LoginButton";
 import LogoutButton from "../components/LogoutButton";
 import PlayButton from "../components/PlayButton";
 import Profile from "../components/Profile";
 import RankingButton from "../components/RankingButton";
+import Score from "../components/Score";
 
 function Home({ userObj }) {
   return (
@@ -17,7 +17,7 @@ function Home({ userObj }) {
               <Profile userObj={userObj} />
             </div>
             <div className="mb-[30px]">
-              <BestScore userObj={userObj} />
+              <Score userObj={userObj} />
             </div>
             <div className="mb-[20px]">
               <PlayButton />
