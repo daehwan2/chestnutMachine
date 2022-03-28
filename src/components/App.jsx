@@ -3,6 +3,8 @@ import { authService, database } from "../fbase";
 import "firebase/database";
 import { onValue, ref, set } from "firebase/database";
 import AppRouter from "./AppRouter";
+import "../font.css";
+
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -39,7 +41,7 @@ function App() {
   // }, [isLoggedIn]);
 
   return (
-    <div>
+    <div className="mainFont">
       {init ? (
         <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
       ) : (
