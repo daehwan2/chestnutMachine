@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/chestnutMachine/static/css/main.5e6fe7b8.css",
+    "main.js": "/chestnutMachine/static/js/main.c9389f8c.js",
+    "index.html": "/chestnutMachine/index.html",
+    "main.5e6fe7b8.css.map": "/chestnutMachine/static/css/main.5e6fe7b8.css.map",
+    "main.c9389f8c.js.map": "/chestnutMachine/static/js/main.c9389f8c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5e6fe7b8.css",
+    "static/js/main.c9389f8c.js"
+  ]
+}
