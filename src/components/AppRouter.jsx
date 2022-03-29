@@ -26,7 +26,7 @@ function AppRouter({
         <strong>딱밤머신</strong>
       </a>
 
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           {isLoggedIn ? (
             <>
