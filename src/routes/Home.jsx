@@ -1,5 +1,5 @@
-import { ref, set } from "firebase/database";
-import React, { useEffect } from "react";
+import { onValue, ref, set } from "firebase/database";
+import React, { useEffect, useState } from "react";
 import { GiHighPunch, GiPunchingBag } from "react-icons/gi";
 import LoginButton from "../components/LoginButton";
 import LogoutButton from "../components/LogoutButton";
@@ -9,10 +9,10 @@ import RankingButton from "../components/RankingButton";
 import Score from "../components/Score";
 import { database } from "../fbase";
 
-function Home({ userObj, isPlaying, playingUser }) {
+function Home({ userObj, isPlaying, playingUser, bestScore }) {
   useEffect(() => {
     set(ref(database, "score"), 0);
-  });
+  }, []);
   useEffect(() => {
     console.log("playing", playingUser);
   }, [playingUser]);
@@ -26,7 +26,7 @@ function Home({ userObj, isPlaying, playingUser }) {
             </div>
             <div className="mb-[30px]">
               <div className="text-center">나의 최고 기록</div>
-              <Score userObj={userObj} score={"0000"} />
+              <Score userObj={userObj} score={bestScore} />
             </div>
             <div>
               {playingUser

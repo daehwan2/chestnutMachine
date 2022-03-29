@@ -6,6 +6,7 @@ function LoginButton() {
   const onGoogleLogin = async (e) => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(authService, provider);
+    window.location.reload();
   };
   return (
     <div>

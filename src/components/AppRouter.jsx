@@ -5,7 +5,14 @@ import Play from "../routes/Play";
 import Ranking from "../routes/Ranking";
 import { GiPunchBlast } from "react-icons/gi";
 import GoHome from "./GoHome";
-function AppRouter({ isLoggedIn, userObj, isPlaying, playingUser }) {
+function AppRouter({
+  isLoggedIn,
+  userObj,
+  isPlaying,
+  playingUser,
+  bestScore,
+  scoresObj,
+}) {
   useEffect(() => {
     console.log("play2", playingUser);
   }, [playingUser]);
@@ -30,10 +37,14 @@ function AppRouter({ isLoggedIn, userObj, isPlaying, playingUser }) {
                     userObj={userObj}
                     isPlaying={isPlaying}
                     playingUser={playingUser}
+                    bestScore={bestScore}
                   />
                 }
               />
-              <Route path="/ranking" element={<Ranking userObj={userObj} />} />
+              <Route
+                path="/ranking"
+                element={<Ranking scoresObj={scoresObj} userObj={userObj} />}
+              />
               <Route
                 path="/play"
                 element={
@@ -48,7 +59,10 @@ function AppRouter({ isLoggedIn, userObj, isPlaying, playingUser }) {
           ) : (
             <>
               <Route path="/" element={<Home isPlaying={isPlaying} />} />
-              <Route path="/ranking" element={<Ranking />} />
+              <Route
+                path="/ranking"
+                element={<Ranking scoresObj={scoresObj} />}
+              />
               <Route path="/play" element={<GoHome />} />
             </>
           )}

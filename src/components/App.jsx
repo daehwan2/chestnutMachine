@@ -11,6 +11,9 @@ function App() {
   const [userObj, setUserObj] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playingUser, setPlayingUser] = useState(null);
+  const [bestScore, setBestScore] = useState(0);
+  const [scoresObj, setScoresObj] = useState([]);
+
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
@@ -28,27 +31,43 @@ function App() {
       setInit(true);
     });
   }, []);
-
   useEffect(() => {
-    //   if (isLoggedIn) {
-    //     set(ref(database, "test22"), {
-    //       abc: "다다다",
-    //     });
-    onValue(ref(database, "isPlaying"), (snapshot) => {
-      const data = snapshot.val();
-      setIsPlaying(data);
-      console.log(data);
-    });
-    onValue(ref(database, "playingUser"), (snapshot) => {
-      const data = snapshot.val();
-      setPlayingUser(data);
-      console.log(data);
-    });
-    //   }
-  }, []);
+    console.log(bestScore);
+    if (init) {
+      onValue(ref(database, "scores"), (snapshot) => {
+        let scores = [];
+        let max = 0;
+        snapshot.forEach((childSnapshot) => {
+          const childKey = childSnapshot.key;
+          const childData = childSnapshot.val();
+          if (userObj) {
+            if (userObj.uid === childData.uid && childData.score > max) {
+              max = childData.score;
+              console.log(max);
+            }
+            setBestScore(max);
+          }
+          console.log("childData:", childData);
+          setScoresObj((prev) => [...prev, childData]);
+          scores.push(childData);
+        });
+        console.log("scores", scores);
+      });
+      onValue(ref(database, "isPlaying"), (snapshot) => {
+        const data = snapshot.val();
+        setIsPlaying(data);
+        console.log(data);
+      });
+      onValue(ref(database, "playingUser"), (snapshot) => {
+        const data = snapshot.val();
+        setPlayingUser(data);
+        console.log(data);
+      });
+    }
+  }, [init]);
   useEffect(() => {
-    console.log("play1", playingUser);
-  }, [playingUser]);
+    console.log("scoresObj", scoresObj);
+  }, [scoresObj]);
   return (
     <div className="mainFont">
       {init ? (
@@ -57,6 +76,8 @@ function App() {
           isLoggedIn={isLoggedIn}
           userObj={userObj}
           playingUser={playingUser}
+          scoresObj={scoresObj}
+          bestScore={bestScore}
         />
       ) : (
         "Loading"
