@@ -1,4 +1,4 @@
-import { onValue, push, ref, set } from "firebase/database";
+import { get, onValue, push, ref, set } from "firebase/database";
 import { addDoc, collection } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,7 @@ function Play({ isPlaying, userObj, playingUser }) {
       setScore(data);
       console.log(data);
     });
+    set(ref(database, "isCompleted"), false);
   }, []);
   useEffect(() => {
     if (!isPlaying) {
@@ -39,16 +40,19 @@ function Play({ isPlaying, userObj, playingUser }) {
       const scoreListRef = ref(database, "scores");
       const newScoreRef = push(scoreListRef);
       set(newScoreRef, obj);
+      set(ref(database, "isCompleted"), true);
     }
   }, [score]);
   return (
     <div className="flex flex-col justify-center items-center h-[100%]">
       <Score score={score} />
-      <div className="text-center mb-[10px]">딱밤머신을 쳐주세요.</div>
+      <div className="text-center mb-[10px]">
+        {score > 0 ? "점수 측정 완료!" : "딱밤머신을 쳐주세요."}
+      </div>
       <div className="mb-[20px]">
         <StopButton />
       </div>
-      <RankingButton />
+      <RankingButton isPlaying={isPlaying} />
     </div>
   );
 }

@@ -35,6 +35,7 @@ function App() {
     console.log(bestScore);
     if (init) {
       onValue(ref(database, "scores"), (snapshot) => {
+        setScoresObj([]);
         let scores = [];
         let max = 0;
         snapshot.forEach((childSnapshot) => {

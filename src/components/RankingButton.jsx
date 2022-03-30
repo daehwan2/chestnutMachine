@@ -1,9 +1,15 @@
+import { ref, set } from "firebase/database";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { database } from "../fbase";
 
-function RankingButton() {
+function RankingButton({ isPlaying }) {
   const navigate = useNavigate();
   const onClickButton = () => {
+    if (isPlaying) {
+      set(ref(database, "isPlaying"), false);
+      set(ref(database, "playingUser"), null);
+    }
     navigate("/ranking");
   };
   return (
