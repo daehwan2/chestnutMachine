@@ -33,7 +33,15 @@ function Ranking({ scoresObj }) {
         <li className="flex flex-col justify-around text-center">
           <div className="mb-[10px]">플레이시간</div>
           {result.map((score, i) => (
-            <div className="mb-[5px]">{score.createdAt}</div>
+            <div className="mb-[5px]">
+              {`${new Date(score.createdAt).getFullYear()}년 ${new Date(
+                score.createdAt
+              ).getMonth()}월 ${new Date(
+                score.createdAt
+              ).getDate()}일 ${new Date(score.createdAt).getHours()}:${new Date(
+                score.createdAt
+              ).getMinutes()}`}
+            </div>
           ))}
         </li>
       </ol>
