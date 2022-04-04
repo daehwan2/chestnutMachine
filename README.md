@@ -50,3 +50,139 @@ https://www.figma.com/file/HbsvGWSwO512AxkmoUUTxk/%EB%94%B1%EB%B0%A4%EB%A8%B8%EC
 - 한태희
 - 임준오
 - 박지호
+
+# 👑 결과물 웹 URL: https://daehwan2.github.io/chestnutMachine/
+
+> 팀원과의 공유 및 결과를 공유하고 이용하기 위해 미리 웹을 먼저 작업했다.
+
+|home(비로그인시)|home(로그인시)|play|ranking|
+|------|---|---|---|
+|![image](https://user-images.githubusercontent.com/53414542/160878649-5df5ba8c-8d82-4297-9813-f21eb105d84b.png)|![image](https://user-images.githubusercontent.com/53414542/160878778-ca2f37b0-1fb6-4492-bf46-be8e90936230.png)|![image](https://user-images.githubusercontent.com/53414542/160880086-86a95b8b-75eb-400d-84ef-1377c1694351.png)|![image](https://user-images.githubusercontent.com/53414542/160879181-13e82272-d717-4356-82dd-9ccc8e1a726b.png)|
+
+
+# 데이터베이스 구조
+
+> realtime database를 이용해 아두이노와의 통신을 한다
+- 게임하기를 누르면 `isPlaying`을 `true` 로 세팅하고 `playingUser`에 로그인된 유저 정보를 넣는다.
+- /play 페이지에서 `isPlaying`이 `true`고 유저가 있으면 `score` 값을 받아와서 0이상 값이 입력되면 `scores`배열에 추가한다.
+- (이때 `score` 값에는 아두이노에서 센서값이 입력된다.)
+- `scores` 배열에 값이 추가되면 `isCompleted`를 `true`로 세팅한다.
+
+### 게임을 하고있지않을때의 db (/play 페이지에 로그인한 유저가없을때) 
+```json
+{
+  "isCompleted": false,
+  "isPlaying": false,
+  "score": 0,
+  "scores": {
+    "-MzPc2C2mO1AWS1B0ZMF": {
+      "createdAt": 1648640409229,
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "score": 765,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    },
+    "-MzPeD_z8Tuwcu0203aX": {
+      "createdAt": 1648640978086,
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "score": 807,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    },
+    "-MzPeGlmGhIMicBMBJgo": {
+      "createdAt": 1648640991129,
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "score": 737,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    }
+  }
+}
+
+```
+
+### 게임을 하고있을때의 db (/play 페이지에 로그인한 유저가 있을 경우 )
+
+```json
+{
+  "isCompleted": false,
+  "isPlaying": true,
+  "playingUser": {
+    "email": "yournight0482@gmail.com",
+    "name": "김대환",
+    "photoURL": "https://lh3.googleusercontent.com/a/AATXAJxbEhdq_D6aZbEbMoXP74LGmoNWmdqz1fjPf1RY=s96-c",
+    "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+  },
+  "score": 0,
+  "scores": {
+    "-MzPc2C2mO1AWS1B0ZMF": {
+      "createdAt": 1648640409229,
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "score": 765,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    },
+    "-MzPeD_z8Tuwcu0203aX": {
+      "createdAt": 1648640978086,
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "score": 807,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    },
+    "-MzPeGlmGhIMicBMBJgo": {
+      "createdAt": 1648640991129,
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "score": 737,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    }
+  }
+}
+```
+
+### 게임중인 유저가 있을때 딱밤머신을 쳤을 경우의 db
+
+```json
+{
+  "isCompleted": true,
+  "isPlaying": true,
+  "playingUser": {
+    "email": "yournight0482@gmail.com",
+    "name": "김대환",
+    "photoURL": "https://lh3.googleusercontent.com/a/AATXAJxbEhdq_D6aZbEbMoXP74LGmoNWmdqz1fjPf1RY=s96-c",
+    "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+  },
+  "score": 550,
+  "scores": {
+    "-MzPc2C2mO1AWS1B0ZMF": {
+      "createdAt": 1648640409229,
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "score": 765,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    },
+    "-MzPeD_z8Tuwcu0203aX": {
+      "createdAt": 1648640978086,
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "score": 807,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    },
+    "-MzPeGlmGhIMicBMBJgo": {
+      "createdAt": 1648640991129,
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "score": 737,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    },
+    "-MzQWspIkv61pfB7Wzwq": {
+      "createdAt": 1648655569038,
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "score": 550,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    }
+  }
+}
+
+```
