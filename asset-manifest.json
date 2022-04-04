@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/chestnutMachine/static/css/main.390b6c27.css",
-    "main.js": "/chestnutMachine/static/js/main.60e06dec.js",
+    "main.js": "/chestnutMachine/static/js/main.fdb9ce8e.js",
     "index.html": "/chestnutMachine/index.html",
     "main.390b6c27.css.map": "/chestnutMachine/static/css/main.390b6c27.css.map",
-    "main.60e06dec.js.map": "/chestnutMachine/static/js/main.60e06dec.js.map"
+    "main.fdb9ce8e.js.map": "/chestnutMachine/static/js/main.fdb9ce8e.js.map"
   },
   "entrypoints": [
     "static/css/main.390b6c27.css",
-    "static/js/main.60e06dec.js"
+    "static/js/main.fdb9ce8e.js"
   ]
 }
