@@ -9,31 +9,21 @@ function Ranking({ scoresObj }) {
     <div className="flex flex-col justify-center items-center py-[50px] w-[100%] md:w-[500px] m-auto">
       <strong className="text-[24px]">랭킹</strong>
 
-      <ol className="flex justify-around w-[100%] mb-[20px]">
-        <li className="flex flex-col justify-around text-center">
-          <div className="mb-[10px]">순위</div>
-          {result.map((score, i) => (
-            <div className="mb-[5px]">{i + 1}</div>
-          ))}
+      <ol className="flex flex-col text-center">
+        <li className="flex">
+          <div className="w-[50px]">순위</div>
+          <div className="w-[70px]">이름</div>
+          <div className="w-[70px]">점수</div>
+          <div className="w-[170px]">플레이시간</div>
         </li>
-        <li className="flex flex-col justify-around text-center">
-          <div className="mb-[10px]">이름</div>
-          {result.map((score, i) => (
-            <div className="mb-[5px]">{score.name}</div>
-          ))}
-        </li>
-        <li className="flex flex-col justify-around text-center">
-          <div className="mb-[10px]">점수</div>
-          {result.map((score, i) => (
-            <div className="text-[red] bg-[black] rounded-[4px] px-[5px] mb-[5px]">
+        {result.map((score, i) => (
+          <li className="flex">
+            <div className="w-[50px]">{i + 1}</div>
+            <div className="w-[70px]">{score.name}</div>
+            <div className="w-[70px] text-[red] bg-[black] rounded-[4px] px-[5px]">
               {score.score}
             </div>
-          ))}
-        </li>
-        <li className="flex flex-col justify-around text-center">
-          <div className="mb-[10px]">플레이시간</div>
-          {result.map((score, i) => (
-            <div className="mb-[5px]">
+            <div className="w-[170px] mb-[5px]">
               {`${new Date(score.createdAt).getFullYear()}년 ${new Date(
                 score.createdAt
               ).getMonth()}월 ${new Date(
@@ -42,8 +32,8 @@ function Ranking({ scoresObj }) {
                 score.createdAt
               ).getMinutes()}`}
             </div>
-          ))}
-        </li>
+          </li>
+        ))}
       </ol>
       <div className="text-center text-[12px] font-bold	">
         <strong>
