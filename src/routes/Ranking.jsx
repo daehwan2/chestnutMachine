@@ -13,15 +13,15 @@ function Ranking({ scoresObj }) {
         <li className="flex">
           <div className="w-[50px]">순위</div>
           <div className="w-[70px]">이름</div>
-          <div className="w-[70px]">점수</div>
+          <div className="w-[50px]">점수</div>
           <div className="w-[170px]">플레이시간</div>
         </li>
         {result.map((score, i) => (
           <li className="flex">
             <div className="w-[50px]">{i + 1}</div>
             <div className="w-[70px]">{score.name}</div>
-            <div className="w-[70px] text-[red] bg-[black] rounded-[4px] px-[5px]">
-              {score.score}
+            <div className="w-[50px] h-[100%] text-[red] bg-[black] rounded-[4px] flex justify-center items-center">
+              <div>{score.score}</div>
             </div>
             <div className="w-[170px] mb-[5px]">
               {`${new Date(score.createdAt).getFullYear()}년 ${new Date(
