@@ -13,6 +13,7 @@ function AppRouter({
   playingUser,
   bestScore,
   scoresObj,
+  playingUsers,
 }) {
   useEffect(() => {
     console.log("play2", playingUser);
@@ -32,6 +33,7 @@ function AppRouter({
                     isPlaying={isPlaying}
                     playingUser={playingUser}
                     bestScore={bestScore}
+                    playingUsers={playingUsers}
                   />
                 }
               />
@@ -46,6 +48,7 @@ function AppRouter({
                     userObj={userObj}
                     isPlaying={isPlaying}
                     playingUser={playingUser}
+                    playingUsers={playingUsers}
                   />
                 }
               />

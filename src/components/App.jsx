@@ -11,6 +11,7 @@ function App() {
   const [userObj, setUserObj] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playingUser, setPlayingUser] = useState(null);
+  const [playingUsers, setPlayingUsers] = useState([]);
   const [bestScore, setBestScore] = useState(0);
   const [scoresObj, setScoresObj] = useState([]);
 
@@ -34,6 +35,14 @@ function App() {
   useEffect(() => {
     console.log(bestScore);
     if (init) {
+      onValue(ref(database, "playingUsers"), (snapshot) => {
+        setPlayingUsers([]);
+        snapshot.forEach((child) => {
+          console.log("hi");
+          console.log(child.val());
+          setPlayingUsers((prev) => [...prev, child.val()]);
+        });
+      });
       onValue(ref(database, "scores"), (snapshot) => {
         setScoresObj([]);
         let scores = [];
@@ -79,6 +88,7 @@ function App() {
           playingUser={playingUser}
           scoresObj={scoresObj}
           bestScore={bestScore}
+          playingUsers={playingUsers}
         />
       ) : (
         "Loading"

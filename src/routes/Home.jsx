@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import { GiHighPunch, GiPunchingBag } from "react-icons/gi";
 import LoginButton from "../components/LoginButton";
 import LogoutButton from "../components/LogoutButton";
-import PlayButton from "../components/PlayButton";
+import JoinButton from "../components/JoinButton";
 import Profile from "../components/Profile";
 import RankingButton from "../components/RankingButton";
 import Score from "../components/Score";
 import { database } from "../fbase";
 
-function Home({ userObj, isPlaying, playingUser, bestScore }) {
+function Home({ userObj, isPlaying, playingUser, bestScore, playingUsers }) {
   useEffect(() => {
     set(ref(database, "score"), 0);
   }, []);
@@ -29,15 +29,16 @@ function Home({ userObj, isPlaying, playingUser, bestScore }) {
               <Score userObj={userObj} score={bestScore} />
             </div>
             <div>
-              {playingUser
-                ? playingUser.name + "님이 게임중입니다."
-                : "게임중인 유저가 없습니다."}
+              {playingUsers.length === 0
+                ? "게임중인 유저가 없습니다."
+                : `${playingUsers[0].name}님의 방이 있습니다. ( ${playingUsers.length}/ 4)`}
             </div>
             <div className="mb-[20px]">
-              <PlayButton
+              <JoinButton
                 isPlaying={isPlaying}
                 userObj={userObj}
                 playingUser={playingUser}
+                playingUsers={playingUsers}
               />
             </div>
             <div className="mb-[20px]">
