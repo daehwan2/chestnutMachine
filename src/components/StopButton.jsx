@@ -3,12 +3,21 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { database } from "../fbase";
 
-function StopButton({ playingUsers, userObj }) {
+function StopButton({ playingUsers, userObj, isPlaying }) {
   const navigate = useNavigate();
   const onStopButton = () => {
     const result = playingUsers.filter((user) => user.uid !== userObj.uid);
     set(ref(database, "playingUsers"), result);
-    set(ref(database, "isPlaying"), false);
+    if (playingUsers.length === 0) {
+      set(ref(database, "playingUsers"), null);
+      set(ref(database, "isPlaying"), false);
+      set(ref(database, "isCompleted"), false);
+    }
+    if (isPlaying) {
+      set(ref(database, "playingUsers"), null);
+      set(ref(database, "isPlaying"), false);
+      set(ref(database, "isCompleted"), false);
+    }
     navigate("/");
   };
   return (

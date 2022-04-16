@@ -2,9 +2,12 @@ import React from "react";
 import { GiPunchBlast } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 
-function Logo() {
+function Logo({ disabled }) {
   const navigate = useNavigate();
   const onClickButton = () => {
+    if (disabled) {
+      return;
+    }
     navigate("/");
   };
   return (

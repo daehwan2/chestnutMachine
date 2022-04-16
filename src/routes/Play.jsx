@@ -12,6 +12,8 @@ import PlayButton from "../components/PlayButton";
 function Play({ isPlaying, userObj, playingUser, playingUsers }) {
   const [score, setScore] = useState(0);
   const [turn, setTurn] = useState(0);
+  const [seconds, setSeconds] = useState(5);
+  const [isCompleted, setIsCompleted] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     window.addEventListener("beforeunload", () => {
@@ -19,6 +21,7 @@ function Play({ isPlaying, userObj, playingUser, playingUsers }) {
       console.log();
       set(ref(database, "isPlaying"), false);
     });
+
     onValue(ref(database, "score"), (snapshot) => {
       const data = snapshot.val();
       setScore(data);
@@ -30,10 +33,19 @@ function Play({ isPlaying, userObj, playingUser, playingUsers }) {
       console.log(data);
     });
     set(ref(database, "isCompleted"), false);
+    onValue(ref(database, "isCompleted"), (snapshot) => {
+      const data = snapshot.val();
+      setIsCompleted(data);
+      console.log(data);
+    });
   }, []);
   useEffect(() => {}, [playingUsers]);
   useEffect(() => {
-    if (score > 0 && isPlaying) {
+    if (score > 0 && isPlaying && !isCompleted) {
+      const array = [...playingUsers];
+      array[turn - 1] = { ...playingUsers[turn - 1], score: score };
+      set(ref(database, "playingUsers"), array);
+
       const obj = {
         score: score,
         name: playingUsers[turn - 1].name,
@@ -41,11 +53,27 @@ function Play({ isPlaying, userObj, playingUser, playingUsers }) {
         uid: playingUsers[turn - 1].uid,
         createdAt: Date.now(),
       };
-      set(ref(database, "turn"), turn < playingUsers.length ? turn + 1 : 1);
       const scoreListRef = ref(database, "scores");
       const newScoreRef = push(scoreListRef);
       set(newScoreRef, obj);
-      set(ref(database, "isCompleted"), true);
+
+      if (turn >= playingUsers.length) {
+        //점수 측정 완료
+        set(ref(database, "turn"), 0);
+        set(ref(database, "isCompleted"), true);
+        setInterval(() => {
+          setSeconds((prev) => prev - 1);
+        }, 1000);
+        setTimeout(() => {
+          set(ref(database, "playingUsers"), null);
+          set(ref(database, "isPlaying"), false);
+          set(ref(database, "isCompleted"), false);
+          navigate("/");
+        }, 6000);
+        return;
+      }
+
+      set(ref(database, "turn"), turn + 1);
     }
   }, [score]);
   return (
@@ -54,106 +82,76 @@ function Play({ isPlaying, userObj, playingUser, playingUsers }) {
         {playingUsers.length >= 1 ? playingUsers[0].name : ""}님의 방입니다.{" "}
         {playingUsers.length >= 1 ? playingUsers.length : 0}/ 4
       </h1>
-      <div className="flex flex-wrap justify-around">
-        <div className="border-[1px] border-black rounded-[4px] w-[45%] flex flex-col justify-center items-center mb-[10px]">
-          {playingUsers.length >= 1 ? (
-            <>
-              <Profile
-                userObj={{
-                  email: playingUsers[0].email,
-                  name: playingUsers[0].name,
-                  photoURL: playingUsers[0].photoURL,
-                  uid: playingUsers[0].uid,
-                }}
-                size="small"
-              />
-              <Score score={score} size="small" />
-              <div className="text-center">
-                {score > 0 ? "점수 측정 완료!" : "딱밤머신을 쳐주세요."}
-              </div>
-            </>
-          ) : (
-            <div>대기중입니다.</div>
-          )}
-        </div>
 
-        <div className="border-[1px] border-black rounded-[4px] w-[45%] h-[125px] flex flex-col justify-center items-center mb-[10px]">
-          {playingUsers.length >= 2 ? (
-            <>
-              <Profile
-                userObj={{
-                  email: playingUsers[1].email,
-                  name: playingUsers[1].name,
-                  photoURL: playingUsers[1].photoURL,
-                  uid: playingUsers[1].uid,
-                }}
-                size="small"
-              />
-              <Score score={score} size="small" />
-              <div className="text-center">
-                {score > 0 ? "점수 측정 완료!" : "딱밤머신을 쳐주세요."}
-              </div>
-            </>
-          ) : (
-            <div>대기중입니다.</div>
-          )}
-        </div>
-        <div className="border-[1px] border-black rounded-[4px] w-[45%] h-[125px] flex flex-col justify-center items-center mb-[10px]">
-          {playingUsers.length >= 3 ? (
-            <>
-              <Profile
-                userObj={{
-                  email: playingUsers[2].email,
-                  name: playingUsers[2].name,
-                  photoURL: playingUsers[2].photoURL,
-                  uid: playingUsers[2].uid,
-                }}
-                size="small"
-              />
-              <Score score={score} size="sm8all" />
-              <div className="text-center">
-                {score > 0 ? "점수 측정 완료!" : "딱밤머신을 쳐주세요."}
-              </div>
-            </>
-          ) : (
-            <div>대기중입니다.</div>
-          )}
-        </div>
-        <div className="border-[1px] border-black rounded-[4px] w-[45%] h-[125px] flex flex-col justify-center items-center mb-[10px]">
-          {playingUsers.length >= 4 ? (
-            <>
-              <Profile
-                userObj={{
-                  email: playingUsers[3].email,
-                  name: playingUsers[3].name,
-                  photoURL: playingUsers[3].photoURL,
-                  uid: playingUsers[3].uid,
-                }}
-                size="small"
-              />
-              <Score score={score} size="small" />
-              <div className="text-center">
-                {score > 0 ? "점수 측정 완료!" : "딱밤머신을 쳐주세요."}
-              </div>
-            </>
-          ) : (
-            <div>대기중입니다.</div>
-          )}
-        </div>
+      <div className="flex flex-wrap justify-around">
+        {[0, 1, 2, 3].map((i) => (
+          <>
+            <div
+              className={`border-[1px] border-black rounded-[4px] w-[45%] flex flex-col justify-center items-center mb-[10px] ${
+                i + 1 === turn && isPlaying
+                  ? "bg-gradient-to-r from-cyan-500 to-blue-500"
+                  : ""
+              }`}>
+              {playingUsers.length >= i + 1 ? (
+                <>
+                  <Profile
+                    userObj={{
+                      email: playingUsers[i].email,
+                      name: playingUsers[i].name,
+                      photoURL: playingUsers[i].photoURL,
+                      uid: playingUsers[i].uid,
+                    }}
+                    size="small"
+                  />
+                  <Score
+                    score={playingUsers[i].score ? playingUsers[i].score : 0}
+                    size="small"
+                  />
+                  <div className="text-center">
+                    {i + 1 === turn && isPlaying
+                      ? playingUsers[i]
+                        ? playingUsers[i].score > 0
+                          ? "점수 측정 완료!"
+                          : ""
+                        : "딱밤머신을 쳐주세요."
+                      : ""}
+                  </div>
+                </>
+              ) : (
+                <div>대기중입니다.</div>
+              )}
+            </div>
+          </>
+        ))}
       </div>
 
       {playingUsers.length >= 1 ? (
         <div className="mb-[20px]">
           {playingUsers[0].uid === userObj.uid ? (
-            <PlayButton isPlaying={isPlaying} />
+            <PlayButton
+              isPlaying={isPlaying}
+              isCompleted={isCompleted}
+              seconds={seconds}
+            />
           ) : (
-            <></>
+            <div className="flex justify-center items-center w-[280px] h-[60px] border-[1px] border-black rounded-[10px] drop-shadow-lg bg-gray-300">
+              {isPlaying
+                ? isCompleted
+                  ? `게임끝 ( ${seconds}초 뒤 나가집니다. )`
+                  : "게임중"
+                : "방장님이 게임하기 버튼을 누르면 시작됩니다."}
+            </div>
           )}
         </div>
       ) : (
         <></>
       )}
-      <StopButton playingUsers={playingUsers} userObj={userObj} />
+
+      <StopButton
+        isPlaying={isPlaying}
+        playingUsers={playingUsers}
+        userObj={userObj}
+      />
     </div>
   );
 }

@@ -21,7 +21,7 @@ function AppRouter({
   return (
     <div className="h-[100vh] bg-[#DFD8D8]">
       <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <Logo />
+        <Logo disabled={isPlaying ? true : false} />
         <Routes>
           {isLoggedIn ? (
             <>

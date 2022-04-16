@@ -10,12 +10,6 @@ import Score from "../components/Score";
 import { database } from "../fbase";
 
 function Home({ userObj, isPlaying, playingUser, bestScore, playingUsers }) {
-  useEffect(() => {
-    set(ref(database, "score"), 0);
-  }, []);
-  useEffect(() => {
-    console.log("playing", playingUser);
-  }, [playingUser]);
   return (
     <>
       {userObj ? (

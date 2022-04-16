@@ -7,8 +7,6 @@ function RankingButton({ isPlaying }) {
   const navigate = useNavigate();
   const onClickButton = () => {
     if (isPlaying) {
-      set(ref(database, "isPlaying"), false);
-      set(ref(database, "playingUser"), null);
     }
     navigate("/ranking");
   };

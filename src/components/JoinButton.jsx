@@ -13,7 +13,6 @@ function JoinButton({ isPlaying, userObj, playingUser, playingUsers }) {
     let isUser = false;
     playingUsers.map((user) => {
       if (user.uid === userObj.uid) {
-        console.log("다다0");
         isUser = true;
         navigate("/play");
         return;
@@ -22,13 +21,17 @@ function JoinButton({ isPlaying, userObj, playingUser, playingUsers }) {
     if (isUser) {
       return;
     }
+    if (isPlaying) {
+      alert("게임이 시작되었습니다.");
+      return;
+    }
     if (playingUsers.length > 3) {
       alert("인원이 다찼습니다.");
       return;
     }
     const usersListRef = ref(database, "playingUsers");
     const newUserRef = push(usersListRef);
-    set(newUserRef, userObj);
+    set(newUserRef, { ...userObj, score: 0 });
     navigate("/play");
   };
   return (
