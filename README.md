@@ -52,7 +52,10 @@ https://www.figma.com/file/HbsvGWSwO512AxkmoUUTxk/%EB%94%B1%EB%B0%A4%EB%A8%B8%EC
 - 박지호
 
 # 👑 결과물 웹 URL: https://daehwan2.github.io/chestnutMachine/
-(현재 멀티 버젼으로 배포되어 있다. 추후에 브랜치를 새로파서 리드미 작성예정.)
+(현재 멀티 버젼으로 배포되어 있다. feature/multi 브랜치)
+https://github.com/daehwan2/chestnutMachine/tree/feature/multi-game
+- 멀티버젼 브랜치
+
 > 팀원과의 공유 및 결과를 공유하고 이용하기 위해 미리 웹을 먼저 작업했다.
 
 |home(비로그인시)|home(로그인시)|play|ranking|
