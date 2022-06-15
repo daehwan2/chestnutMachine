@@ -3,7 +3,7 @@
 아두이노, 웹앱, 파이어베이스를 이용한 딱밤머신 만들기<br/>
 (Arduiono Wemos D1 R1 + React + Firebase realtimeDatabase)
 
-main branch에 solo version을 먼저 작업했고 추가로
+solo version([solo브랜치](https://github.com/daehwan2/chestnutMachine/tree/solo))을 먼저 작업했고 추가로
 멀티플레이 기능을 넣었습니다.
 
 # 📃 요구사항 명세 (Multi version)
