@@ -6,7 +6,8 @@
 solo version([solo브랜치](https://github.com/daehwan2/chestnutMachine/tree/solo))을 먼저 작업했고 추가로
 멀티플레이 기능을 넣었습니다.
 
-![image](./document-image/test.gif)
+<img src="./document-image/test.gif" width="250" height="auto"/>
+
 
 # 📃 요구사항 명세 (Multi version)
 
