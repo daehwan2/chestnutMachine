@@ -1,188 +1,201 @@
-# 🥊 딱밤 머신 ( chestnutMachine )
+# 🥊 딱밤 머신 ( chestnutMachine ) Multi version
 
 아두이노, 웹앱, 파이어베이스를 이용한 딱밤머신 만들기<br/>
 (Arduiono Wemos D1 R1 + React + Firebase realtimeDatabase)
 
+main branch에 solo version을 먼저 작업했고 추가로
+멀티플레이 기능을 넣었습니다.
 
 
-# ❓ 기획 배경
+# 📃 요구사항 명세 (Multi version)
 
-캡스톤 디자인으로 시작하게 됐습니다.<br/>
-아두이노와 웹을 연동해보고 싶어서 재밌을 것 같은 프로젝트를 찾다가 마트에서 파는 딱밤머신을 보게되었고<br/>
-랭킹기능을 제공하면 재밌겠다고 생각해서 기획하게 되었습니다.
+- 게임의 최대 인원수는 4명이다.
+- 첫번째로 방을 만드는 사람이 방장이 되며 게임 시작하기를 누를 수 있다.
+- 홈 화면에서 방 생성여부를 알 수 있다.
+- 게임을 시작하면 방에들어온 유저 순서대로 딱밤머신을 쳐서 점수를 측정한다.
 
-
-![image](https://user-images.githubusercontent.com/53414542/159893511-62be50c0-1a69-4eea-bb1e-fee4f87fe42d.png)
-
-
-# 📃 요구사항 명세
-
-- Hardware
-  - 기존 장난감의 기능을 제공하면서 웹앱과 연동해서 플레이 할 수 있게 제조한다.
-     - 딱밤으로 머신을 때리면 뒤에있는 센서에 부딪혀서 점수를 측정한다.
-     - 최고기록은 4digit-segment로 제공한다. (기존 3자리에서 4자리로 변경)
-     - 시작버튼은 없앤다. ( 웹앱에서만 시작이 가능함. => 식별을 위해서 )
-     - 시작버튼을 웹앱에서 눌렀을때 머신이 올라와서 때릴수 있는 상태로 된다.
-- Software
-  - Home page
-    - 구글로그인 버튼 및 랭킹버튼을 보여준다.
-    - 로그인된 상태면 유저이름과 유저가 플레이한 게임횟수, 최고기록, 시작버튼, 로그아웃 버튼을 보여준다.
-  - Ranking page 
-    - 랭킹을 제공한다. 1~30등정도까지 볼수 있다.
-    - 자신의 랭킹은 볼 수 있게 한다.
-  - Play page
-    - 시작버튼을 눌렀을땐 플레이하고 있는 유저가 있으면 alert를 통해 알려주고 동작이 안되게한다.
-    - 시작버튼을 눌렀을때 플레이하고 있는 유저가 없으면 hardware쪽에서 머신이 올라와서 칠수 있는 상태가 된다.
-    - 시작버튼을 눌렀을때 플레이하고 있는 유저가 없으면 머신을 때려주세요를 띄우고 센서에 점수가 측정될때까지 기다린다.
-    - 점수가 측정되면 점수를 보여주고 일정시간뒤에 랭킹페이지로 이동한다.
- 
-
-# 🎨디자인 작업
+# 🎨디자인 작업 (Multi version 추가)
 https://www.figma.com/file/HbsvGWSwO512AxkmoUUTxk/%EB%94%B1%EB%B0%A4%EB%A8%B8%EC%8B%A0?node-id=0%3A1
 
+# 스크린샷
+|  홈 | 게임 페이지  | 유저가 들어왔을 경우 | 게임시작  | 게임 끝 |
+| --- | --- | --- | --- |  --- |
+| ![image](https://user-images.githubusercontent.com/53414542/165442822-8fe198d4-0403-453c-bc6a-d889350c171d.png) | ![image](https://user-images.githubusercontent.com/53414542/165443011-63f032f1-c16e-4a42-b870-8c24c250a5cb.png) | ![image](https://user-images.githubusercontent.com/53414542/165443462-f92bac79-9917-440e-8cd1-33274c7f5ec7.png) | ![image](https://user-images.githubusercontent.com/53414542/165443515-aff69ef0-7c37-4f2b-ac23-da2b5fd59376.png) | ![image](https://user-images.githubusercontent.com/53414542/165443684-8d988c6e-0a05-4fc6-8c61-6c8ec64e6153.png) |
 
-# 👩‍👧‍👧조원
-**부경대학교 디스플레이 반도체공학과 2022-1 캡스톤 2조**
-- 김대환
-- 안동환
-- 성미진
-- 염소연
-- 한태희
-- 임준오
-- 박지호
-
-# 👑 결과물 웹 URL: https://daehwan2.github.io/chestnutMachine/
-
-> 팀원과의 공유 및 결과를 공유하고 이용하기 위해 미리 웹을 먼저 작업했다.
-
-|home(비로그인시)|home(로그인시)|play|ranking|
-|------|---|---|---|
-|![image](https://user-images.githubusercontent.com/53414542/160878649-5df5ba8c-8d82-4297-9813-f21eb105d84b.png)|![image](https://user-images.githubusercontent.com/53414542/160878778-ca2f37b0-1fb6-4492-bf46-be8e90936230.png)|![image](https://user-images.githubusercontent.com/53414542/160880086-86a95b8b-75eb-400d-84ef-1377c1694351.png)|![image](https://user-images.githubusercontent.com/53414542/160879181-13e82272-d717-4356-82dd-9ccc8e1a726b.png)|
+# 👑 결과물 웹 URL: https://daehwan2.github.io/chestnutMachine/ ( Multi version )
 
 
 # 데이터베이스 구조
 
-> realtime database를 이용해 아두이노와의 통신을 한다
-- 게임하기를 누르면 `isPlaying`을 `true` 로 세팅하고 `playingUser`에 로그인된 유저 정보를 넣는다.
-- /play 페이지에서 `isPlaying`이 `true`고 유저가 있으면 `score` 값을 받아와서 0이상 값이 입력되면 `scores`배열에 추가한다.
-- (이때 `score` 값에는 아두이노에서 센서값이 입력된다.)
-- `scores` 배열에 값이 추가되면 `isCompleted`를 `true`로 세팅한다.
-
-### 게임을 하고있지않을때의 db (/play 페이지에 로그인한 유저가없을때) 
+### 유저 3명이 대기중일 때
 ```json
 {
   "isCompleted": false,
   "isPlaying": false,
-  "score": 0,
-  "scores": {
-    "-MzPc2C2mO1AWS1B0ZMF": {
-      "createdAt": 1648640409229,
+  "playingUsers": {
+    "-N0dPOBFva3ysyC-OK6N": {
       "email": "yournight0482@gmail.com",
       "name": "김대환",
-      "score": 765,
+      "photoURL": "https://lh3.googleusercontent.com/a/AATXAJxbEhdq_D6aZbEbMoXP74LGmoNWmdqz1fjPf1RY=s96-c",
+      "score": 0,
       "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
     },
-    "-MzPeD_z8Tuwcu0203aX": {
-      "createdAt": 1648640978086,
-      "email": "yournight0482@gmail.com",
-      "name": "김대환",
-      "score": 807,
-      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    "-N0dPPFvQyH_kc-TCEoO": {
+      "email": "olivly1004@pukyong.ac.kr",
+      "name": "성미진",
+      "photoURL": "https://lh3.googleusercontent.com/a/AATXAJycJM9YFAz2JWKAUtUFFT55aNGdB5S2lLyMVsM=s96-c",
+      "score": 0,
+      "uid": "HiK1Wz3qrcYejPj1moaTDGDM4w12"
     },
-    "-MzPeGlmGhIMicBMBJgo": {
-      "createdAt": 1648640991129,
-      "email": "yournight0482@gmail.com",
-      "name": "김대환",
-      "score": 737,
-      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    "-N0dPoTtrXfst8EwJEFk": {
+      "email": "thzns99@gmail.com",
+      "name": "소연",
+      "photoURL": "https://lh3.googleusercontent.com/a/AATXAJxQirk8LWPzOZ2Z0qmvSp30PiX1WPtbFhsJnTcB=s96-c",
+      "score": 0,
+      "uid": "k0SjuXH2Q6OX7xCK5AG5w1n2lPA3"
     }
-  }
+  },
+  "score": 0,
+  "turn": 0
 }
-
 ```
 
-### 게임을 하고있을때의 db (/play 페이지에 로그인한 유저가 있을 경우 )
+### 게임시작 눌렀을 경우 ( turn = 1 인 경우 첫번째 유저의 점수 )
 
 ```json
 {
   "isCompleted": false,
   "isPlaying": true,
-  "playingUser": {
-    "email": "yournight0482@gmail.com",
-    "name": "김대환",
-    "photoURL": "https://lh3.googleusercontent.com/a/AATXAJxbEhdq_D6aZbEbMoXP74LGmoNWmdqz1fjPf1RY=s96-c",
-    "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+  "playingUsers": {
+    "-N0dPOBFva3ysyC-OK6N": {
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "photoURL": "https://lh3.googleusercontent.com/a/AATXAJxbEhdq_D6aZbEbMoXP74LGmoNWmdqz1fjPf1RY=s96-c",
+      "score": 0,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    },
+    "-N0dPPFvQyH_kc-TCEoO": {
+      "email": "olivly1004@pukyong.ac.kr",
+      "name": "성미진",
+      "photoURL": "https://lh3.googleusercontent.com/a/AATXAJycJM9YFAz2JWKAUtUFFT55aNGdB5S2lLyMVsM=s96-c",
+      "score": 0,
+      "uid": "HiK1Wz3qrcYejPj1moaTDGDM4w12"
+    },
+    "-N0dPoTtrXfst8EwJEFk": {
+      "email": "thzns99@gmail.com",
+      "name": "소연",
+      "photoURL": "https://lh3.googleusercontent.com/a/AATXAJxQirk8LWPzOZ2Z0qmvSp30PiX1WPtbFhsJnTcB=s96-c",
+      "score": 0,
+      "uid": "k0SjuXH2Q6OX7xCK5AG5w1n2lPA3"
+    }
   },
   "score": 0,
-  "scores": {
-    "-MzPc2C2mO1AWS1B0ZMF": {
-      "createdAt": 1648640409229,
+  "turn": 1
+}
+```
+### turn = 3 인경우 세번째 유저의 점수 측정을 기다리는 상태
+
+```json
+{
+  "isCompleted": false,
+  "isPlaying": true,
+  "playingUsers": [
+    {
       "email": "yournight0482@gmail.com",
       "name": "김대환",
-      "score": 765,
+      "photoURL": "https://lh3.googleusercontent.com/a/AATXAJxbEhdq_D6aZbEbMoXP74LGmoNWmdqz1fjPf1RY=s96-c",
+      "score": 999,
       "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
     },
-    "-MzPeD_z8Tuwcu0203aX": {
-      "createdAt": 1648640978086,
-      "email": "yournight0482@gmail.com",
-      "name": "김대환",
-      "score": 807,
-      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    {
+      "email": "olivly1004@pukyong.ac.kr",
+      "name": "성미진",
+      "photoURL": "https://lh3.googleusercontent.com/a/AATXAJycJM9YFAz2JWKAUtUFFT55aNGdB5S2lLyMVsM=s96-c",
+      "score": 444,
+      "uid": "HiK1Wz3qrcYejPj1moaTDGDM4w12"
     },
-    "-MzPeGlmGhIMicBMBJgo": {
-      "createdAt": 1648640991129,
-      "email": "yournight0482@gmail.com",
-      "name": "김대환",
-      "score": 737,
-      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    {
+      "email": "thzns99@gmail.com",
+      "name": "소연",
+      "photoURL": "https://lh3.googleusercontent.com/a/AATXAJxQirk8LWPzOZ2Z0qmvSp30PiX1WPtbFhsJnTcB=s96-c",
+      "score": 0,
+      "uid": "k0SjuXH2Q6OX7xCK5AG5w1n2lPA3"
     }
-  }
+  ],
+  "score": 0,
+  "scores": {
+    "-N0dPxavUu6XHRcOctmU": {
+      "createdAt": 1651036119131,
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "score": 999,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    },
+    "-N0dQ-MweV4CYEWmqm3I": {
+      "createdAt": 1651036130460,
+      "email": "olivly1004@pukyong.ac.kr",
+      "name": "성미진",
+      "score": 444,
+      "uid": "HiK1Wz3qrcYejPj1moaTDGDM4w12"
+    },
+  "turn": 3
 }
 ```
 
-### 게임중인 유저가 있을때 딱밤머신을 쳤을 경우의 db
+### 게임을 완료한 경우(전부 딱밤머신을 친 경우)
 
 ```json
 {
   "isCompleted": true,
   "isPlaying": true,
-  "playingUser": {
-    "email": "yournight0482@gmail.com",
-    "name": "김대환",
-    "photoURL": "https://lh3.googleusercontent.com/a/AATXAJxbEhdq_D6aZbEbMoXP74LGmoNWmdqz1fjPf1RY=s96-c",
-    "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
-  },
-  "score": 550,
-  "scores": {
-    "-MzPc2C2mO1AWS1B0ZMF": {
-      "createdAt": 1648640409229,
+  "playingUsers": [
+    {
       "email": "yournight0482@gmail.com",
       "name": "김대환",
-      "score": 765,
+      "photoURL": "https://lh3.googleusercontent.com/a/AATXAJxbEhdq_D6aZbEbMoXP74LGmoNWmdqz1fjPf1RY=s96-c",
+      "score": 999,
       "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
     },
-    "-MzPeD_z8Tuwcu0203aX": {
-      "createdAt": 1648640978086,
-      "email": "yournight0482@gmail.com",
-      "name": "김대환",
-      "score": 807,
-      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    {
+      "email": "olivly1004@pukyong.ac.kr",
+      "name": "성미진",
+      "photoURL": "https://lh3.googleusercontent.com/a/AATXAJycJM9YFAz2JWKAUtUFFT55aNGdB5S2lLyMVsM=s96-c",
+      "score": 444,
+      "uid": "HiK1Wz3qrcYejPj1moaTDGDM4w12"
     },
-    "-MzPeGlmGhIMicBMBJgo": {
-      "createdAt": 1648640991129,
-      "email": "yournight0482@gmail.com",
-      "name": "김대환",
-      "score": 737,
-      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
-    },
-    "-MzQWspIkv61pfB7Wzwq": {
-      "createdAt": 1648655569038,
-      "email": "yournight0482@gmail.com",
-      "name": "김대환",
-      "score": 550,
-      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    {
+      "email": "thzns99@gmail.com",
+      "name": "소연",
+      "photoURL": "https://lh3.googleusercontent.com/a/AATXAJxQirk8LWPzOZ2Z0qmvSp30PiX1WPtbFhsJnTcB=s96-c",
+      "score": 688,
+      "uid": "k0SjuXH2Q6OX7xCK5AG5w1n2lPA3"
     }
-  }
+  ],
+  "score": 0,
+  "scores": {
+    "-N0dPxavUu6XHRcOctmU": {
+      "createdAt": 1651036119131,
+      "email": "yournight0482@gmail.com",
+      "name": "김대환",
+      "score": 999,
+      "uid": "Kvh7M2sodHRLYTzLeMQdY1W9PFu1"
+    },
+    "-N0dQ-MweV4CYEWmqm3I": {
+      "createdAt": 1651036130460,
+      "email": "olivly1004@pukyong.ac.kr",
+      "name": "성미진",
+      "score": 444,
+      "uid": "HiK1Wz3qrcYejPj1moaTDGDM4w12"
+    },
+    "-N0dQ2Gm5B-m2dFx2KcL": {
+      "createdAt": 1651036142354,
+      "email": "thzns99@gmail.com",
+      "name": "소연",
+      "score": 688,
+      "uid": "k0SjuXH2Q6OX7xCK5AG5w1n2lPA3"
+    }
+  },
+  "turn": 0
 }
 
 ```
