@@ -57,7 +57,7 @@ function Play({ isPlaying, userObj, playingUser, playingUsers }) {
       const newScoreRef = push(scoreListRef);
       set(newScoreRef, obj);
 
-      set(ref(database, "score"), 0);
+      // set(ref(database, "score"), 0);
       if (turn >= playingUsers.length) {
         //점수 측정 완료
         set(ref(database, "turn"), 0);
@@ -110,11 +110,9 @@ function Play({ isPlaying, userObj, playingUser, playingUsers }) {
                   />
                   <div className="text-center">
                     {i + 1 === turn && isPlaying
-                      ? playingUsers[i]
-                        ? playingUsers[i].score > 0
-                          ? "점수 측정 완료!"
-                          : ""
-                        : "딱밤머신을 쳐주세요."
+                      ? "딱밤머신을 쳐주세요."
+                      : playingUsers[i].score > 0
+                      ? "점수측정완료"
                       : ""}
                   </div>
                 </>
